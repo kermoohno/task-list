@@ -1,30 +1,36 @@
-const taskTtitle = document.getElementById(`task-title`)
+const form = document.querySelector('#add-task')
+const taskList = document.querySelector('#task-list')
 
-taskTtitle.style.background = `#333`
-taskTtitle.style.color = `#FFF`
-taskTtitle.style.padding = `15px`
-//taskTtitle.style.display = `none`
+form.addEventListener('submit', addTask)
+taskList.addEventListener('click', deleteTask)
 
-taskTtitle.textContent = `My Tasks`
-taskTtitle.innerText = `My favorite tasks`
-taskTtitle.innerHTML = `<span style="color : red">My Tasks</span>`
+function addTask(event) {
+    // get form input value
+    const taskInput = document.querySelector('#task')
+    // create li with value and x Link
+    const li = document.createElement('li')
+    li.appendChild(document.createTextNode(taskInput.value))
+    li.className = 'collection-item'
 
-let li = document.querySelector(`li`)
-li = document.querySelector(`li:last-child`)
-li = document.querySelector(`li:nth-child(even)`)
-li = document.querySelector(`li:nth-child(odd)`)
+    const x = document.createElement('a')
+    x.appendChild(document.createTextNode('x'))
+    x.setAttribute('href', '#')
+    x.className = 'secondary-content'
 
-const oddli = document.querySelectorAll(`li:nth-child(odd)`)
+    li.appendChild(x)
 
-//for(let i = 0; i < 2; i++){
-//    oddli[i].style.background = `#ddd`
-//}
+    const ul = document.querySelector('ul')
+    ul.appendChild(li)
+    // delete input value from form input field
+    taskInput.value = ''
+    event.preventDefault()
+}
 
-/*oddli.forEach((li) => {li.style.background = `#ddd`})
-
- */
-const list = document.querySelector(`ul`)
-
-console.log(list)
-
+function deleteTask(event){
+    if (event.target.textContent === 'x'){
+        if(confirm('Are you sure to delete this task?')) {
+            event.target.parentElement.remove()
+        }
+    }
+}
 
