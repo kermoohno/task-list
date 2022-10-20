@@ -1,8 +1,10 @@
 const form = document.querySelector('#add-task')
 const taskList = document.querySelector('#task-list')
+const deleteTasks = document.querySelector('#delete-tasks')
 
 form.addEventListener('submit', addTask)
 taskList.addEventListener('click', deleteTask)
+deleteTasks.addEventListener('click', deleteAllTasks)
 
 function addTask(event) {
     // get form input value
@@ -34,3 +36,6 @@ function deleteTask(event){
     }
 }
 
+function deleteAllTasks(event) {
+    taskList.innerHTML = ''
+}
