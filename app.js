@@ -37,5 +37,8 @@ function deleteTask(event){
 }
 
 function deleteAllTasks(event) {
-    taskList.innerHTML = ''
+    //taskList.innerHTML = ''
+    while(taskList.firstChild){
+        taskList.removeChild(taskList.firstChild)
+    }
 }
