@@ -35,6 +35,8 @@ function deleteTask(event){
     if (event.target.textContent === 'x'){
         if(confirm('Are you sure to delete this task?')) {
             event.target.parentElement.remove()
+            let task = event.target.parentElement.textContent.slice(0, length-1)
+            deleteTaskFromLS(task)
         }
     }
 }
@@ -55,5 +57,21 @@ function addTaskToLS(task) {
     }
     tasks.push(task)
     localStorage.setItem('tasks', JSON.stringify(tasks))
-
 }
+
+function deleteTaskFromLS(task) {
+    let tasks
+    if(localStorage.getItem('tasks') === null) {
+        tasks = []
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+    }
+    tasks.forEach((taskFromLS, index) => {
+        if(taskFromLS === task){
+            tasks.splice(index, 1)
+        }
+        console.log(index, taskFromLS)
+    })
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
